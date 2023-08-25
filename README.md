@@ -1,4 +1,4 @@
-# Richest uniswap trader wallet
+# uniswap-v3-wallet-ranker
 
 This script retrieves and sorts Ethereum wallet addresses based on their ETH balances. It fetches the origin addresses from the last `n` swaps on Uniswap V3 and then fetches the current balances of these addresses using the Etherscan API. The results are then sorted in descending order based on the ETH balance, showing the richest wallet first.
 
