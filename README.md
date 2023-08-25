@@ -1,57 +1,37 @@
-# uniswap-v3-wallet-ranker
+# Uniswap Transaction Analyzer
 
-This Python tool retrieves the origin addresses of recent swaps from Uniswap V3 using TheGraph's API. It then fetches the current ETH balances of these addresses using the Etherscan API. The results are ranked in descending order based on balance, showcasing the richest wallets first. Additionally, users can specify a minimum balance threshold to filter and focus on wallets with significant balances.
+The Uniswap Transaction Analyzer is a Python-based utility that fetches the most recent swaps from Uniswap (using TheGraph's subgraph for Uniswap V3), filters them based on a minimum USD transaction value provided by the user, and then sorts the resulting addresses by their total transaction volume in USD. The tool also fetches the current ETH balance for each address using the Etherscan API.
+
+## Features:
+
+1. Fetch the most recent `n` swaps from Uniswap V3.
+2. Filter swaps based on a user-specified minimum USD transaction value.
+3. Aggregate and sort addresses based on their total transaction volume (in USD).
+4. Fetch the current ETH balance of each address from Etherscan.
+5. Export the aggregated and sorted data to a CSV file for further analysis.
 
 ## Prerequisites:
 
-- Python 3
-- `requests` library:
-  ```bash
-  pip install requests
-  ```
+- Python 3.x
+- Requests library (`pip install requests`)
 
-## Configuration:
+## Usage:
 
-Before running the script, ensure to replace the `ETHERSCAN_API_KEY` in the script with your own API key obtained from Etherscan.
+1. Ensure you have Python 3.x installed.
+2. Install the required libraries: `pip install requests`.
+3. Run the script: `python main.py`.
+4. Enter the number of recent swaps you'd like to fetch when prompted.
+5. Provide a minimum USD transaction value to filter the results.
+6. The script will then display the sorted addresses based on transaction volume and also export the data to a CSV file.
 
-```python
-ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY"  # Replace with your Etherscan API Key
-```
+## Code Structure:
 
-## How to Run:
+- `get_last_n_swaps(n)`: Fetches the last `n` swaps from Uniswap V3, returning the address (`origin`) and the transaction amount in USD (`amountUSD`).
 
-1. Ensure you have the prerequisites installed and configured.
-2. Run the script:
-   ```bash
-   python main.py
-   ```
-3. Enter the number of swaps you wish to fetch when prompted.
-4. Specify a minimum balance threshold when prompted.
-5. Wait for the script to fetch and sort the addresses.
-6. The script will display the Ethereum addresses and their corresponding balances in descending order. Optionally, results are saved to "wallets.csv" in the current directory.
+- `get_eth_balance(address)`: Fetches the current ETH balance of a given address using the Etherscan API.
 
-## Key Functions:
+- `export_to_csv(sorted_wallets, filename="wallets.csv")`: Exports the aggregated data to a CSV file.
 
-1. **get_last_n_swaps(n)**
-   - Fetches the origin addresses of the last `n` swaps from Uniswap V3 using TheGraph's API.
-  
-2. **get_eth_balance(address)**
-   - Retrieves the ETH balance of a given Ethereum address using Etherscan's API.
+## Important Note:
 
-## Features:
-   - Fetch origin addresses from Uniswap V3 based on the last n swaps.
-   - Retrieve ETH balances of these addresses.
-   - Filter addresses based on a user-defined minimum balance threshold.
-   - Display and optionally export results to a CSV file.
-
-## Warning:
-
-- Be cautious of Etherscan's rate limits; making too many rapid API calls can get your IP temporarily banned. If you're querying a large number of addresses in a short time, consider adding delays or using a premium API key to increase your rate limits.
-
-## Disclaimer:
-
-This tool is meant for informational purposes only. Always ensure you have the right permissions to fetch data from any platform or service.
-
-## License:
-
-This project is open-sourced under the MIT License. See the LICENSE file for more information. 
+Replace the placeholder `ETHERSCAN_API_KEY` in the script with your actual Etherscan API key for accurate and uninterrupted ETH balance fetching.
