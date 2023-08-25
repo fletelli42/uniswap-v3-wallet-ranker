@@ -23,7 +23,7 @@ ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY"  # Replace with your Etherscan API 
 1. Ensure you have the prerequisites installed and configured.
 2. Run the script:
    ```bash
-   python script_name.py
+   python main.py
    ```
 3. Enter the number of swaps you wish to fetch when prompted.
 4. Wait for the script to fetch and sort the addresses.
@@ -48,5 +48,3 @@ This tool is meant for informational purposes only. Always ensure you have the r
 ## License:
 
 This project is open-sourced under the MIT License. See the LICENSE file for more information. 
-
-(Note: If you do not have a license for this code, you can remove this section or replace it with your preferred license.)
