@@ -3,7 +3,7 @@ import csv
 
 
 ETHERSCAN_API_URL = "https://api.etherscan.io/api"
-ETHERSCAN_API_KEY = "WJM5NHYDVYIG1K1JGEWX1UZDXGYK65VVCG" # Replace with your Etherscan API Key
+ETHERSCAN_API_KEY = "ETHERSCAN_API_KEY" # Replace with your Etherscan API Key
 
 def get_last_n_swaps(n):
     url = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"
