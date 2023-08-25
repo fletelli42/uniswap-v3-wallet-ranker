@@ -1,7 +1,9 @@
 import requests
+import csv
+
 
 ETHERSCAN_API_URL = "https://api.etherscan.io/api"
-ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY" # Replace with your Etherscan API Key
+ETHERSCAN_API_KEY = "ETHERSCAN_API_KEY" # Replace with your Etherscan API Key
 
 def get_last_n_swaps(n):
     url = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"
@@ -39,20 +41,34 @@ def get_eth_balance(address):
     # Convert wei to ether
     return int(data["result"]) / 1e18
 
-# ... [rest of the code remains unchanged]
+def export_to_csv(sorted_wallets, filename="wallets.csv"):
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        
+        # Write the header row
+        writer.writerow(["Address", "Balance (ETH)"])
+        
+        # Write each wallet's details
+        for address, balance in sorted_wallets:
+            writer.writerow([address, f"{balance:.2f}"])
+
 
 if __name__ == "__main__":
     n = int(input("Enter the number of swaps to fetch: "))
+    min_balance = float(input("Enter the minimum balance (in ETH) to filter wallets: "))
+
     origin_addresses = get_last_n_swaps(n)
 
     # Getting unique addresses
     unique_addresses = list(set(origin_addresses))
 
-    # Fetch balances
+    # Fetch balances and filter by minimum balance
     balances = {}
     for address in unique_addresses:
         balance = get_eth_balance(address)
-        balances[address] = balance
+        if balance >= min_balance:
+            balances[address] = balance
+
 
     # Sort by balance, richest to poorest
     sorted_wallets = sorted(balances.items(), key=lambda x: x[1], reverse=True)
@@ -60,3 +76,7 @@ if __name__ == "__main__":
     # Print results
     for address, balance in sorted_wallets:
         print(f"Address: {address}, Balance: {balance:.2f} ETH")
+
+    # Export to CSV
+    export_to_csv(sorted_wallets)
+

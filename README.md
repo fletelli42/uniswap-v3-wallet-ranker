@@ -1,6 +1,6 @@
 # uniswap-v3-wallet-ranker
 
-This script retrieves and sorts Ethereum wallet addresses based on their ETH balances. It fetches the origin addresses from the last `n` swaps on Uniswap V3 and then fetches the current balances of these addresses using the Etherscan API. The results are then sorted in descending order based on the ETH balance, showing the richest wallet first.
+This Python tool retrieves the origin addresses of recent swaps from Uniswap V3 using TheGraph's API. It then fetches the current ETH balances of these addresses using the Etherscan API. The results are ranked in descending order based on balance, showcasing the richest wallets first. Additionally, users can specify a minimum balance threshold to filter and focus on wallets with significant balances.
 
 ## Prerequisites:
 
@@ -26,8 +26,9 @@ ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY"  # Replace with your Etherscan API 
    python main.py
    ```
 3. Enter the number of swaps you wish to fetch when prompted.
-4. Wait for the script to fetch and sort the addresses.
-5. The script will display the Ethereum addresses and their corresponding balances in descending order.
+4. Specify a minimum balance threshold when prompted.
+5. Wait for the script to fetch and sort the addresses.
+6. The script will display the Ethereum addresses and their corresponding balances in descending order. Optionally, results are saved to "wallets.csv" in the current directory.
 
 ## Key Functions:
 
@@ -36,6 +37,12 @@ ETHERSCAN_API_KEY = "YOUR_ETHERSCAN_API_KEY"  # Replace with your Etherscan API 
   
 2. **get_eth_balance(address)**
    - Retrieves the ETH balance of a given Ethereum address using Etherscan's API.
+
+## Features:
+   - Fetch origin addresses from Uniswap V3 based on the last n swaps.
+   - Retrieve ETH balances of these addresses.
+   - Filter addresses based on a user-defined minimum balance threshold.
+   - Display and optionally export results to a CSV file.
 
 ## Warning:
 
